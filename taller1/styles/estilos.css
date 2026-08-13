@@ -1,0 +1,155 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Recuadro blanco principal con sombra exterior profunda */
+.contenedor-principal {
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    width: 750px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Recuadro interno gris delgado para el contenido de login */
+.seccion-login {
+    border: 1px solid #cccccc;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #fafafa;
+}
+
+/* ==========================================================================
+   Tipografías y Textos (Color Verde Institucional)
+   ========================================================================== */
+
+h1 {
+    color: #005a36;
+    font-size: 56px;
+    margin: 0;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+h2 {
+    color: #005a36;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: normal;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.instruccion {
+    color: #005a36;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   Sección Izquierda: Logo
+   ========================================================================== */
+
+.logo-contenedor {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-contenedor img {
+    max-width: 160px;
+    height: auto;
+}
+
+/* ==========================================================================
+   Sección Derecha: Formulario y Campos
+   ========================================================================== */
+
+form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Alinea etiquetas e inputs a la derecha */
+    gap: 15px;
+    padding-left: 20px;
+}
+
+/* Contenedor para alinear la etiqueta al lado de su input */
+.fila-input {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+form label {
+    color: #005a36;
+    font-size: 16px;
+    margin-right: 25px;
+    font-weight: 500;
+}
+
+/* Inputs con el efecto de hundido 3D de la imagen */
+form input {
+    width: 150px;
+    padding: 6px;
+    border: 1px solid #777777;
+    border-radius: 4px;
+    box-shadow: inset 1px 4px 5px rgba(0, 0, 0, 0.2), 1px 2px 2px rgba(0, 0, 0, 0.1);
+    outline: none;
+    font-size: 14px;
+}
+
+/* Botón Aceptar de color verde */
+.btn-enviar {
+    background-color: #005a36;
+    color: #ffffff;
+    border: 1px solid #004026;
+    border-radius: 4px;
+    padding: 6px 22px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.4);
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+.btn-enviar:hover {
+    background-color: #004428;
+}
+
+/* ==========================================================================
+   Barra Inferior Externa (Licencia)
+   ========================================================================== */
+
+.barra-licencia {
+    background-color: #e0e0e0;
+    border: 1px solid #999999;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    width: 750px;
+    text-align: center;
+    margin-top: 15px;
+    padding: 6px 0;
+    box-sizing: border-box;
+}
+
+.barra-licencia p {
+    margin: 0;
+    font-size: 12px;
+    color: #000000;
+    font-weight: 500;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/estilos.css">
+    <title>Parte 2</title>
+</head>
+<body>
+
+    <!-- Contenedor blanco con contorno y sombra -->
+    <div class="contenedor-principal">
+        <h1>SIAC</h1>
+        <h2>Sistema de Administracion de Colegios y Entidades Educativas</h2>
+        <p class="instruccion">ingrese sus datos de acceso</p>
+        
+        <!-- Recuadro interno para el logo y el formulario -->
+        <div class="seccion-login">
+            <div class="logo-contenedor">
+                <img src="../resource/logo.png" alt="Logo SIAC">
+            </div>
+            
+            <form action="">
+                <!-- Filas agrupadas con su etiqueta e input -->
+                <div class="fila-input">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" id="usuario" name="usuario" required>
+                </div>
+
+                <div class="fila-input">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="btn-enviar">Aceptar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Barra gris inferior de licencia fuera del recuadro principal -->
+    <div class="barra-licencia">
+        <p>Licenciado a : Instituacion educativa Hogar Veracruz</p>
+    </div>
+
+</body>
+</html>
