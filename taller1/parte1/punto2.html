@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punto 2</title>
+</head>
+
+<body>
+    <h1>Formulario WEB Basico</h1>
+    <h3>informacion del usuario</h3>
+    <form action="">
+        <!-- NOMBRE -->
+        <label for="name">Nombre:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <!-- EMAIL -->
+        <label for="email">Dirección email:</label>
+        <input type="email" id="email" name="name" placeholder="ejemplo@correo.com" required><br>
+        <!-- CIUDAD LISTA -->
+        <label for="ciudad-seleccionada">Selecciona tu ciudad:</label>
+        <select id="ciudad-seleccionada" name="ciudad" required>
+            <option value="" disabled selected>-- Elige una opción --</option>
+            <option value="bogota">Bogotá</option>
+            <option value="medellin">Medellín</option>
+            <option value="cali">Cali</option>
+            <option value="barranquilla">Barranquilla</option>
+            <option value="cartagena">Cartagena</option>
+        </select>
+        <!-- SELECCION DE AFICIONES -->
+        <P>Aficiones</P>
+        <input type="checkbox" id="deportes" name="aficiones" value="deportes">
+        <label for="deportes">Deportes</label><br>
+
+        <input type="checkbox" id="coches" name="aficiones" value="coches">
+        <label for="coches">Coches</label><br>
+
+        <input type="checkbox" id="musica" name="aficiones" value="musica">
+        <label for="musica">Musica</label><br>
+        <br>
+
+        <!-- SELECCION DE SEXO -->
+        <p>Sexo</p>
+        <input type="radio" id="masculino" name="sexo" value="masculino">
+        <label for="maculino">Masculino</label><br>
+        <input type="radio" id="femenino" name="sexo" value="femenino">
+        <label for="maculino">Masculino</label><br>
+        <br>
+
+        <!-- Botones de Acción -->
+        <input type="submit" value="Enviar formulario">
+        <input type="reset" value="Limpiar formulario">
+    </form>
+</body>
+
+</html>
