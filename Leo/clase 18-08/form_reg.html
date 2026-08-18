@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de alumnos</title>
+</head>
+
+<body>
+    <h2 align="center">Registro de Alumnos</h2>
+    <form action="regalu.php" method="post">
+        <table border="1" align="center">
+            <tr>
+                <th>Codigo:</th>
+                <td><input type="number" name="codigo" placeholder="Ingrese el código"></td>
+            </tr>
+            <tr>
+                <th>Nombre:</th>
+                <td><input type="text" name="nombre" placeholder="Ingrese el nombre"></td>
+            </tr>
+            <tr>
+                <th>Apellido:</th>
+                <td><input type="text" name="apellido" placeholder="Ingrese el apellido"></td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td><input type="email" name="email" placeholder="Ingrese el email"></td>
+            </tr>
+            <tr>
+                <th>Telefono:</th>
+                <td><input type="number" name="telefono" placeholder="Ingrese el telefono"></td>
+            </tr>
+            <tr>
+                <th>Fecha de nacimiento:</th>
+                <td><input type="date" name="fecha_nacimiento" placeholder="Ingrese la fecha de nacimiento"></td>
+            </tr>
+            <tr>
+                <th>Ciudad:</th>
+                <td><select name="ciudad">
+                        <option value="Bogota">Bogota</option>
+                        <option value="Cali">Cali</option>
+                        <option value="Medellin">Medellin</option>
+                        <option value="Armenia">Armenia</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <th>Sexo:</th>
+                <td><input type="radio" name="sexo" value="Masculino">Masculino
+                    <input type="radio" name="sexo" value="Femenino">Femenino
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Registrar Alumno">
+                    <input type="reset" value="Limpiar formulario">
+                </td>
+        </table>
+    </form>
+</body>
+
+</html>
