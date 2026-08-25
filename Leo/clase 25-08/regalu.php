@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de alumnos</title>
+    <title>Registro de alumnos BD</title>
 </head>
-
 <body>
-    <h2 align="center">Registro de Alumnos</h2>
-    <form action="regalu.php" method="post">
+<h2 align="center">Registro de Alumnos</h2>
+    <form action="insertar_alu.php" method="post">
         <table border="1" align="center">
             <tr>
                 <th>Codigo:</th>
@@ -36,27 +34,11 @@
                 <td><input type="date" name="fecha_nacimiento" placeholder="Ingrese la fecha de nacimiento" required></td>
             </tr>
             <tr>
-                <th>Ciudad:</th>
-                <td><select name="ciudad">
-                        <option value="Bogota">Bogota</option>
-                        <option value="Cali">Cali</option>
-                        <option value="Medellin">Medellin</option>
-                        <option value="Armenia">Armenia</option>
-                    </select></td>
-            </tr>
-            <tr>
-                <th>Sexo:</th>
-                <td><input type="radio" name="sexo" value="Masculino">Masculino
-                    <input type="radio" name="sexo" value="Femenino">Femenino
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
+                <td colspan="2">
                     <input type="submit" value="Registrar Alumno">
                     <input type="reset" value="Limpiar formulario">
                 </td>
         </table>
     </form>
 </body>
-
-</html>
+</html> 
