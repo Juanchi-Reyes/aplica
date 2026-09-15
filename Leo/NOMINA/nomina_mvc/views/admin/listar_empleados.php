@@ -19,8 +19,6 @@ require_once '../../controllers/ListarEmpleadoController.php';
 
     <p>
         <a href="registrar_empleado.php">Registrar Nuevo Empleado</a> |
-        <a href="generar_nomina.php">Liquidar Nomina Mensual</a> |
-        <a href="asignar_prestamo.php">Asignar Prestamo</a> |
         <a href="../../logout.php">Cerrar Sesion</a>
     </p>
 
@@ -28,8 +26,7 @@ require_once '../../controllers/ListarEmpleadoController.php';
         <thead>
             <tr>
                 <th>Cedula</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
+                <th>Nombre y Apellido</th>
                 <th>Cargo</th>
                 <th>Salario Base</th>
                 <th>Estado Nomina (Mes Actual)</th>
@@ -39,18 +36,16 @@ require_once '../../controllers/ListarEmpleadoController.php';
         <tbody>
             <?php if (empty($listaEmpleados)): ?>
             <tr>
-                <td colspan="7">No hay empleados registrados.</td>
+                <td colspan="6">No hay empleados registrados.</td>
             </tr>
             <?php else: ?>
             <?php foreach ($listaEmpleados as $empleado): ?>
             <tr>
                 <td><?= $empleado['cedula'] ?></td>
-                <td><?= $empleado['nombre'] ?></td>
-                <td><?= $empleado['apellido'] ?></td>
+                <td><?= $empleado['nombre'] ?> <?= $empleado['apellido'] ?></td>
                 <td><?= $empleado['cargo'] ?></td>
                 <td>$<?= number_format($empleado['salario_base'], 2) ?></td>
 
-                <!-- NUEVA COLUMNA DE ESTADO -->
                 <td>
                     <?php if ($empleado['nomina_calculada']): ?>
                     <b>Calculada</b>
@@ -64,11 +59,16 @@ require_once '../../controllers/ListarEmpleadoController.php';
                     <a href="listar_empleados.php?eliminar=<?= $empleado['id_empleado'] ?>"
                         onclick="return confirm('Seguro de eliminar?');">Eliminar</a> |
 
-                    <!-- BOTONES-->
+                    <?php if ($empleado['prestamo_activo']): ?>
+                    <a href="asignar_prestamo.php?id=<?= $empleado['id_empleado'] ?>">Prestamo en curso</a> |
+                    <?php else: ?>
+                    <a href="asignar_prestamo.php?id=<?= $empleado['id_empleado'] ?>">Asignar Prestamo</a> |
+                    <?php endif; ?>
+
                     <?php if ($empleado['nomina_calculada']): ?>
                     <a href="generar_pdf.php?id=<?= $empleado['id_empleado'] ?>">Descargar PDF</a>
                     <?php else: ?>
-                    <a href="generar_nomina.php">Liquidar</a>
+                    <a href="generar_nomina.php?id=<?= $empleado['id_empleado'] ?>">Liquidar</a>
                     <?php endif; ?>
                 </td>
             </tr>

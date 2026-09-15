@@ -1,18 +1,17 @@
 <?php 
-// vista de asignar prestamo a empleado
 require_once '../../controllers/seguridad_admin.php'; 
-require_once '../../controllers/PrestamoController.php'; // Procesamos la lógica arriba[cite: 1]
+require_once '../../controllers/PrestamoController.php'; 
 ?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <title>Asignar Préstamo</title>
+    <title>Gestionar Prestamo</title>
 </head>
 
 <body>
-    <h2>Asignar Préstamo a Empleado</h2>
+    <h2>Gestionar Prestamo de Empleado</h2>
 
     <?php if (!empty($mensaje)): ?>
     <p><strong><?= $mensaje ?></strong></p>
@@ -20,36 +19,66 @@ require_once '../../controllers/PrestamoController.php'; // Procesamos la lógic
 
     <p><a href="listar_empleados.php">Volver a la lista de empleados</a></p>
 
+    <?php if ($empleado_seleccionado): ?>
+
+    <p>Empleado Seleccionado: <b><?= $empleado_seleccionado['cedula'] ?> - <?= $empleado_seleccionado['nombre'] ?>
+            <?= $empleado_seleccionado['apellido'] ?></b></p>
+
+    <?php if ($prestamo_activo): ?>
+    <h3>Estado del Prestamo en Curso</h3>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th align="left">Fecha de Inicio:</th>
+            <td><?= $prestamo_activo['fecha_desembolso'] ?></td>
+        </tr>
+        <tr>
+            <th align="left">Monto Inicial Prestado:</th>
+            <td>$<?= number_format($prestamo_activo['monto_total'], 2) ?></td>
+        </tr>
+        <tr>
+            <th align="left">Saldo Actual Pendiente:</th>
+            <td><b>$<?= number_format($prestamo_activo['saldo_actual'], 2) ?></b></td>
+        </tr>
+        <tr>
+            <th align="left">Valor Cuota Mensual:</th>
+            <td>$<?= number_format($prestamo_activo['valor_cuota'], 2) ?></td>
+        </tr>
+        <tr>
+            <th align="left">Progreso de Cuotas:</th>
+            <td><?= $prestamo_activo['cuotas_pagadas'] ?> pagadas de <?= $prestamo_activo['cuotas_totales'] ?> totales
+            </td>
+        </tr>
+        <tr>
+            <th align="left">Estado:</th>
+            <td><?= strtoupper($prestamo_activo['estado']) ?></td>
+        </tr>
+    </table>
+
+    <?php else: ?>
+    <h3>Asignar Nuevo Prestamo</h3>
     <form action="asignar_prestamo.php" method="POST">
+        <!-- Input oculto para enviar el ID al procesar -->
+        <input type="hidden" name="id_empleado" value="<?= $empleado_seleccionado['id_empleado'] ?>">
+
         <table border="0">
             <tr>
-                <td><label>Seleccionar Empleado:</label></td>
-                <td>
-                    <select name="id_empleado" required>
-                        <option value="">-- Seleccione un empleado --</option>
-                        <?php foreach ($listaEmpleados as $emp): ?>
-                        <option value="<?= $emp['id_empleado'] ?>">
-                            <?= $emp['cedula'] ?> - <?= $emp['nombre'] ?> <?= $emp['apellido'] ?>
-                        </option>
-                        <?php endforeach; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td><label>Monto Total del Préstamo ($):</label></td>
+                <td><label>Monto Total del Prestamo ($):</label></td>
                 <td><input type="number" name="monto_total" step="0.01" min="1" required></td>
             </tr>
             <tr>
-                <td><label>Número de Cuotas Mensuales:</label></td>
+                <td><label>Numero de Cuotas Mensuales:</label></td>
                 <td><input type="number" name="cuotas_totales" min="1" required></td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <button type="submit" name="btn_asignar_prestamo">Guardar Préstamo</button>
+                    <button type="submit" name="btn_asignar_prestamo">Guardar Prestamo</button>
                 </td>
             </tr>
         </table>
     </form>
+    <?php endif; ?>
+
+    <?php endif; ?>
 </body>
 
 </html>

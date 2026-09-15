@@ -9,22 +9,22 @@ $modeloEmpleado = new Empleado($conexion);
 $modeloPrestamo = new Prestamo($conexion);
 $modeloNomina = new Nomina($conexion);
 
-$listaEmpleados = $modeloEmpleado->listarTodos();
 $mensaje = "";
+$empleado_seleccionado = null;
 
 define('SMLV', 1750905);
 define('AUXILIO_TRANSPORTE', 249095);
 
+// Si se envia el formulario
 if (isset($_POST['btn_calcular_nomina'])) {
     $mes_actual = date('n'); 
     $anio_actual = date('Y');
     
-    // Recibimos el ID desde el menu desplegable
+    // Atrapamos el ID desde el input oculto
     $id_empleado = $_POST['id_empleado'];
     $empleado = $modeloEmpleado->obtenerPorId($id_empleado);
     $sueldo = $empleado['salario_base'];
     
-    // Capturamos los dias
     $dias = $_POST['dias_laborados'];
     $dias_eps = $_POST['dias_eps'] ?? 0;
     $dias_arl = $_POST['dias_arl'] ?? 0;
@@ -38,7 +38,6 @@ if (isset($_POST['btn_calcular_nomina'])) {
     } else if ($modeloNomina->verificarNominaMes($id_empleado, $mes_actual, $anio_actual)) {
         $mensaje = "Error: Este empleado ya tiene una nomina liquidada para este mes.";
     } else {
-        // Solo si pasa las validaciones, procedemos a liquidar
         $horas_nocturnas = $_POST['horas_nocturnas'] ?? 0;
         $horas_dominicales = $_POST['horas_dominicales'] ?? 0;
         
@@ -80,5 +79,19 @@ if (isset($_POST['btn_calcular_nomina'])) {
             $mensaje = "Error al guardar la nomina en la base de datos.";
         }
     }
+    // Mantenemos al empleado cargado para la vista despues de guardar
+    $empleado_seleccionado = $empleado;
+    
+} 
+// Si entramos desde la tabla con un ID
+else if (isset($_GET['id'])) {
+    $empleado_seleccionado = $modeloEmpleado->obtenerPorId($_GET['id']);
+    if (!$empleado_seleccionado) {
+        die("Empleado no encontrado.");
+    }
+} 
+// Si intentan entrar sin ID
+else {
+    die("Acceso denegado. Seleccione un empleado desde la lista.");
 }
 ?>

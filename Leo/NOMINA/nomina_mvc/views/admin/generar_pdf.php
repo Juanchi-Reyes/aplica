@@ -57,7 +57,7 @@ $emp_arl = $ibc * 0.00522;
 $emp_ccf = $ibc * 0.04;
 $total_costo_empresa = $nomina['total_devengado'] + $prima + $cesantias + $int_cesantias + $vacaciones + $emp_pension + $emp_arl + $emp_ccf;
 
-// Iniciamos Output Buffering sin imprimir echo[cite: 1]
+// Iniciamos Output Buffering sin imprimir echo
 ob_start();
 ?>
 <!DOCTYPE html>
@@ -89,7 +89,7 @@ ob_start();
     </table>
 
     <br>
-    <h3>2. DETALLE DE INGRESOS (Lo que recibe)</h3>
+    <h3>2. DETALLE DE INGRESOS</h3>
     <table border="1" width="100%" cellpadding="5">
         <tr>
             <th align="left">Concepto</th>
@@ -133,7 +133,7 @@ ob_start();
     </table>
 
     <br>
-    <h3>3. DETALLE DE DESCUENTOS (Lo que se le quita)</h3>
+    <h3>3. DETALLE DE DESCUENTOS</h3>
     <table border="1" width="100%" cellpadding="5">
         <tr>
             <th align="left">Concepto</th>

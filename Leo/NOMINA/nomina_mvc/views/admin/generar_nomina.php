@@ -5,11 +5,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Generar Nómina Individual</title>
+    <title>Generar Nomina Individual</title>
 </head>
 
 <body>
-    <h2>Liquidar Nómina por Empleado</h2>
+    <h2>Liquidar Nomina por Empleado</h2>
 
     <?php if (!empty($mensaje)): ?>
     <p><strong><?= $mensaje ?></strong></p>
@@ -17,31 +17,29 @@
 
     <p><a href="listar_empleados.php">Ver listado de empleados</a></p>
 
+    <?php if ($empleado_seleccionado): ?>
     <form action="generar_nomina.php" method="POST">
+        <!-- Input oculto para enviar el ID al procesar -->
+        <input type="hidden" name="id_empleado" value="<?= $empleado_seleccionado['id_empleado'] ?>">
+
         <table border="0">
             <tr>
-                <td><label>Seleccionar Empleado:</label></td>
+                <td><label>Empleado:</label></td>
                 <td>
-                    <select name="id_empleado" required>
-                        <option value="">-- Seleccione un empleado --</option>
-                        <?php foreach ($listaEmpleados as $emp): ?>
-                        <option value="<?= $emp['id_empleado'] ?>">
-                            <?= $emp['cedula'] ?> - <?= $emp['nombre'] ?> <?= $emp['apellido'] ?>
-                        </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <b><?= $empleado_seleccionado['cedula'] ?> - <?= $empleado_seleccionado['nombre'] ?>
+                        <?= $empleado_seleccionado['apellido'] ?></b>
                 </td>
             </tr>
             <tr>
-                <td><label>Días Laborados:</label></td>
+                <td><label>Dias Laborados:</label></td>
                 <td><input type="number" name="dias_laborados" value="30" max="30" min="0" required></td>
             </tr>
             <tr>
-                <td><label>Días Incapacidad EPS:</label></td>
+                <td><label>Dias Incapacidad EPS:</label></td>
                 <td><input type="number" name="dias_eps" value="0" min="0"></td>
             </tr>
             <tr>
-                <td><label>Días Incapacidad ARL:</label></td>
+                <td><label>Dias Incapacidad ARL:</label></td>
                 <td><input type="number" name="dias_arl" value="0" min="0"></td>
             </tr>
             <tr>
@@ -59,6 +57,7 @@
             </tr>
         </table>
     </form>
+    <?php endif; ?>
 </body>
 
 </html>
