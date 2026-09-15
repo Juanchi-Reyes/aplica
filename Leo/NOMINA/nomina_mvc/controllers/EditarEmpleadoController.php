@@ -14,11 +14,14 @@ if (isset($_POST['btn_actualizar'])) {
     $cedula = trim($_POST['cedula']);
     $nombre = trim($_POST['nombre']);
     $apellido = trim($_POST['apellido']);
+    $telefono = trim($_POST['telefono']);
+    $correo = trim($_POST['correo']);
     $centro_costo = trim($_POST['centro_costo']);
     $cargo = trim($_POST['cargo']);
     $salario_base = $_POST['salario_base'];
 
-    if ($modeloEmpleado->actualizar($id_empleado, $cedula, $nombre, $apellido, $centro_costo, $cargo, $salario_base)) {
+    // Pasamos teléfono y correo a la función actualizar
+    if ($modeloEmpleado->actualizar($id_empleado, $cedula, $nombre, $apellido, $telefono, $correo, $centro_costo, $cargo, $salario_base)){
         $mensaje = "Datos actualizados correctamente.";
     } else {
         $mensaje = "Error al actualizar los datos.";

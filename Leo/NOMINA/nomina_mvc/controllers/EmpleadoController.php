@@ -11,13 +11,15 @@ if(isset($_POST['btn_registrar'])){
     $password = $_POST['password'];
     $nombre = trim($_POST['nombre']);
     $apellido = trim($_POST['apellido']);
+    $telefono = trim($_POST['telefono']); // NUEVO
+    $correo = trim($_POST['correo']);     // NUEVO
     $centro_costo = trim($_POST['centro_costo']);
     $cargo = trim($_POST['cargo']);
-    $salario_base = $_POST['salario_base'];
+    $salario_base = $_POST['salario_base'];    
 
     //Instanciamos el modelo de empleado
     $modeloEmpleado = new Empleado($conexion);
-    if ($modeloEmpleado->registrar($cedula, $password, $nombre, $apellido, $centro_costo, $cargo, $salario_base)) {
+    if ($modeloEmpleado->registrar($cedula, $password, $nombre, $apellido, $telefono, $correo, $centro_costo, $cargo, $salario_base)) {
         $mensaje = "Empleado registrado exitosamente.";
     } else {
         $mensaje = "Error al registrar el empleado. Es posible que la cédula ya exista.";

@@ -1,6 +1,5 @@
 <?php
-// models/Empleado.php
-
+// Empleado
 class Empleado {
     private $conexion;
 
@@ -8,25 +7,37 @@ class Empleado {
         $this->conexion = $db;
     }
 
-    public function registrar($cedula, $password, $nombre, $apellido, $centro_costo, $cargo, $salario_base) {
-        // Encriptamos la contraseña por seguridad antes de guardarla
+    // Funcion para registrar un empleado
+    public function registrar($cedula, $password, $nombre, $apellido, $telefono, $correo, $centro_costo, $cargo, $salario_base) {
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
-        $rol = 'empleado'; // Por defecto, todos los registrados aquí son empleados
+        $rol = 'empleado'; 
 
-        // Usamos sentencias preparadas (?)
-        $sql = "INSERT INTO empleados (cedula, password, rol, nombre, apellido, centro_costo, cargo, salario_base) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        // Añadimos telefono y correo a la consulta SQL
+        $sql = "INSERT INTO empleados (cedula, password, rol, nombre, apellido, telefono, correo, centro_costo, cargo, salario_base) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = mysqli_prepare($this->conexion, $sql);
-        
         if ($stmt) {
-            // Vinculamos los parámetros (s = string, d = double/decimal)
-            mysqli_stmt_bind_param($stmt, "sssssssd", $cedula, $password_hash, $rol, $nombre, $apellido, $centro_costo, $cargo, $salario_base);
-            
+            // "sssssssssd" -> 9 strings, 1 decimal
+            mysqli_stmt_bind_param($stmt, "sssssssssd", $cedula, $password_hash, $rol, $nombre, $apellido, $telefono, $correo, $centro_costo, $cargo, $salario_base);
             if (mysqli_stmt_execute($stmt)) {
                 return true;
             }
-            mysqli_stmt_close($stmt);
+        }
+        return false;
+    }
+
+    // Función para actualizar los datos de un empleado
+    public function actualizar($id_empleado, $cedula, $nombre, $apellido, $telefono, $correo, $centro_costo, $cargo, $salario_base) {
+        $sql = "UPDATE empleados SET cedula=?, nombre=?, apellido=?, telefono=?, correo=?, centro_costo=?, cargo=?, salario_base=? WHERE id_empleado=?";
+        $stmt = mysqli_prepare($this->conexion, $sql);
+        
+        if ($stmt) {
+            // "sssssssdi" -> 7 strings, 1 decimal, 1 entero osea 9 variables XDDD
+            mysqli_stmt_bind_param($stmt, "sssssssdi", $cedula, $nombre, $apellido, $telefono, $correo, $centro_costo, $cargo, $salario_base, $id_empleado);
+            if (mysqli_stmt_execute($stmt)) {
+                return true;
+            }
         }
         return false;
     }
@@ -76,19 +87,5 @@ class Empleado {
         return false;
     }
 
-    // Función para actualizar los datos del empleado
-    public function actualizar($id_empleado, $cedula, $nombre, $apellido, $centro_costo, $cargo, $salario_base) {
-        $sql = "UPDATE empleados SET cedula=?, nombre=?, apellido=?, centro_costo=?, cargo=?, salario_base=? WHERE id_empleado=?";
-        $stmt = mysqli_prepare($this->conexion, $sql);
-        
-        if ($stmt) {
-            // "sssssdi" -> 5 strings, 1 double (salario), 1 integer (id)
-            mysqli_stmt_bind_param($stmt, "sssssdi", $cedula, $nombre, $apellido, $centro_costo, $cargo, $salario_base, $id_empleado);
-            if (mysqli_stmt_execute($stmt)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
 ?>

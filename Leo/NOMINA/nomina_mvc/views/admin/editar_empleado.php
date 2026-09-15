@@ -1,3 +1,4 @@
+<?php require_once '../../controllers/seguridad_admin.php'; ?>
 <?php
 // views/admin/editar_empleado.php
 require_once '../../controllers/EditarEmpleadoController.php';
@@ -40,6 +41,14 @@ require_once '../../controllers/EditarEmpleadoController.php';
             <tr>
                 <td><label>Apellidos:</label></td>
                 <td><input type="text" name="apellido" value="<?= $empleado['apellido'] ?>" required></td>
+            </tr>
+            <tr>
+                <td><label>Teléfono:</label></td>
+                <td><input type="text" name="telefono" value="<?= $empleado['telefono'] ?>" required></td>
+            </tr>
+            <tr>
+                <td><label>Correo Electrónico:</label></td>
+                <td><input type="email" name="correo" value="<?= $empleado['correo'] ?>" required></td>
             </tr>
             <tr>
                 <td><label>Centro de Costo:</label></td>

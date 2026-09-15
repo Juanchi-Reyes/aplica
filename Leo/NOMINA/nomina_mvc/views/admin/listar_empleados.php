@@ -1,73 +1,81 @@
-<?php
-// vista de listar_empleados
-// Traemos el controlador
-require_once '../../controllers/ListarEmpleadoController.php';
+<?php 
+require_once '../../controllers/seguridad_admin.php';
+require_once '../../controllers/ListarEmpleadoController.php'; 
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Empleados - Nómina</title>
+    <title>Lista de Empleados</title>
 </head>
 
 <body>
+    <h2>Listado General de Empleados</h2>
 
-    <h2>Listado de Empleados</h2>
-
-    <!-- Mostrar mensajes de éxito o error -->
     <?php if (!empty($mensaje_accion)): ?>
     <p><strong><?= $mensaje_accion ?></strong></p>
     <?php endif; ?>
 
-    <p><a href="registrar_empleado.php">Registrar Nuevo Empleado</a></p>
+    <p>
+        <a href="registrar_empleado.php">Registrar Nuevo Empleado</a> |
+        <a href="generar_nomina.php">Liquidar Nomina Mensual</a> |
+        <a href="asignar_prestamo.php">Asignar Prestamo</a> |
+        <a href="../../logout.php">Cerrar Sesion</a>
+    </p>
 
-    <table>
+    <table border="1">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Cédula</th>
-                <th>Rol</th>
+                <th>Cedula</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Centro Costo</th>
                 <th>Cargo</th>
                 <th>Salario Base</th>
+                <th>Estado Nomina (Mes Actual)</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Si la lista está vacía, mostramos un mensaje, si no, recorremos el array -->
             <?php if (empty($listaEmpleados)): ?>
             <tr>
-                <td colspan="9">No hay empleados registrados en la base de datos.</td>
+                <td colspan="7">No hay empleados registrados.</td>
             </tr>
             <?php else: ?>
             <?php foreach ($listaEmpleados as $empleado): ?>
             <tr>
-                <td><?= $empleado['id_empleado'] ?></td>
                 <td><?= $empleado['cedula'] ?></td>
-                <td><?= $empleado['rol'] ?></td>
                 <td><?= $empleado['nombre'] ?></td>
                 <td><?= $empleado['apellido'] ?></td>
-                <td><?= $empleado['centro_costo'] ?></td>
                 <td><?= $empleado['cargo'] ?></td>
-                <!-- number_format para que el dinero se vea con buen formato -->
                 <td>$<?= number_format($empleado['salario_base'], 2) ?></td>
+
+                <!-- NUEVA COLUMNA DE ESTADO -->
                 <td>
-                    <!-- Botones Editar y Eliminar -->
+                    <?php if ($empleado['nomina_calculada']): ?>
+                    <b>Calculada</b>
+                    <?php else: ?>
+                    <b>Pendiente</b>
+                    <?php endif; ?>
+                </td>
+
+                <td>
                     <a href="editar_empleado.php?id=<?= $empleado['id_empleado'] ?>">Editar</a> |
-                    <!-- Enviamos la petición de eliminar -->
                     <a href="listar_empleados.php?eliminar=<?= $empleado['id_empleado'] ?>"
-                        onclick="return confirm('¿Estás seguro de eliminar a este empleado?');">Eliminar</a>
+                        onclick="return confirm('Seguro de eliminar?');">Eliminar</a> |
+
+                    <!-- BOTONES-->
+                    <?php if ($empleado['nomina_calculada']): ?>
+                    <a href="generar_pdf.php?id=<?= $empleado['id_empleado'] ?>">Descargar PDF</a>
+                    <?php else: ?>
+                    <a href="generar_nomina.php">Liquidar</a>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>
             <?php endif; ?>
         </tbody>
     </table>
-
 </body>
 
 </html>

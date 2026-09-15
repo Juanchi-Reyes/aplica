@@ -1,3 +1,4 @@
+<?php require_once '../../controllers/seguridad_admin.php'; ?>
 <?php
 // vista de registrar_empleado
 
@@ -16,6 +17,7 @@ require_once '../../controllers/EmpleadoController.php';
 
 <body>
     <h2>Registrar Nuevo Empleado</h2>
+    <p><a href="listar_empleados.php">Volver a la lista de empleados</a></p>
 
     <!-- Sintaxis alternativa para mostrar mensajes -->
     <?php if (!empty($mensaje)): ?>
@@ -39,6 +41,14 @@ require_once '../../controllers/EmpleadoController.php';
             <tr>
                 <td><label>Apellidos:</label></td>
                 <td><input type="text" name="apellido" required></td>
+            </tr>
+            <tr>
+                <td><label>Teléfono:</label></td>
+                <td><input type="text" name="telefono" required></td>
+            </tr>
+            <tr>
+                <td><label>Correo Electrónico:</label></td>
+                <td><input type="email" name="correo" required></td>
             </tr>
             <tr>
                 <td><label>Centro de Costo:</label></td>
