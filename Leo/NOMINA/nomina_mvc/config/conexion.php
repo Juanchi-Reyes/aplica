@@ -3,7 +3,7 @@
 $host = "localhost";
 $usuario = "root";
 $password = ""; // Base de datos sin contraseña por defecto
-$base_datos = "nomina_mvc";
+$base_datos = "gestion_nomina";
 
 // Establecemos la conexión
 $conexion = mysqli_connect($host, $usuario, $password, $base_datos);

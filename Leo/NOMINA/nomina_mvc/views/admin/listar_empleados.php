@@ -1,6 +1,6 @@
-<?php 
+<?php
 require_once '../../controllers/seguridad_admin.php';
-require_once '../../controllers/ListarEmpleadoController.php'; 
+require_once '../../controllers/ListarEmpleadoController.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,44 +25,46 @@ require_once '../../controllers/ListarEmpleadoController.php';
     <table border="1">
         <thead>
             <tr>
-                <th>Cedula</th>
-                <th>Nombre y Apellido</th>
+                <th>Cédula</th>
+                <th>Nombre Completo</th>
                 <th>Cargo</th>
+                <th>Centro de Costo</th>
                 <th>Salario Base</th>
-                <th>Estado Nomina (Mes Actual)</th>
+                <th>Estado Nómina</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             <?php if (empty($listaEmpleados)): ?>
             <tr>
-                <td colspan="6">No hay empleados registrados.</td>
+                <td colspan="7">No hay empleados registrados.</td>
             </tr>
             <?php else: ?>
             <?php foreach ($listaEmpleados as $empleado): ?>
             <tr>
-                <td><?= $empleado['cedula'] ?></td>
-                <td><?= $empleado['nombre'] ?> <?= $empleado['apellido'] ?></td>
-                <td><?= $empleado['cargo'] ?></td>
-                <td>$<?= number_format($empleado['salario_base'], 2) ?></td>
+                <td><?= $empleado['numero_identificacion'] ?></td>
+                <td><?= $empleado['nombre_completo'] ?></td>
+                <td><?= $empleado['nombre_cargo'] ?></td>
+                <td><?= $empleado['nombre_centro_costo'] ?></td>
+                <td>$<?= number_format($empleado['sueldo_base'], 2) ?></td>
 
                 <td>
                     <?php if ($empleado['nomina_calculada']): ?>
-                    <b>Calculada</b>
+                    <b style="color: green;">Calculada</b>
                     <?php else: ?>
-                    <b>Pendiente</b>
+                    <b style="color: red;">Pendiente</b>
                     <?php endif; ?>
                 </td>
 
                 <td>
                     <a href="editar_empleado.php?id=<?= $empleado['id_empleado'] ?>">Editar</a> |
                     <a href="listar_empleados.php?eliminar=<?= $empleado['id_empleado'] ?>"
-                        onclick="return confirm('Seguro de eliminar?');">Eliminar</a> |
+                        onclick="return confirm('¿Seguro de eliminar?');">Eliminar</a> |
 
                     <?php if ($empleado['prestamo_activo']): ?>
-                    <a href="asignar_prestamo.php?id=<?= $empleado['id_empleado'] ?>">Prestamo en curso</a> |
+                    <a href="asignar_prestamo.php?id=<?= $empleado['id_empleado'] ?>">Préstamo en curso</a> |
                     <?php else: ?>
-                    <a href="asignar_prestamo.php?id=<?= $empleado['id_empleado'] ?>">Asignar Prestamo</a> |
+                    <a href="asignar_prestamo.php?id=<?= $empleado['id_empleado'] ?>">Asignar Préstamo</a> |
                     <?php endif; ?>
 
                     <?php if ($empleado['nomina_calculada']): ?>

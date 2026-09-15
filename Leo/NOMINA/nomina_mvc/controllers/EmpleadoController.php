@@ -1,29 +1,33 @@
 <?php
-// Controlador de empleado
-// Incluimos la conexión y el modelo
+// controllers/EmpleadoController.php
 require_once __DIR__ . '/../config/conexion.php';
 require_once __DIR__ . '/../models/Empleado.php';
 
-$mensaje = ""; // Variable para mostrar alertas al usuario
-if(isset($_POST['btn_registrar'])){
-    // Recolectamos los datos del formulario
+$mensaje = "";
+
+if (isset($_POST['btn_registrar'])) {
+
     $cedula = trim($_POST['cedula']);
     $password = $_POST['password'];
     $nombre = trim($_POST['nombre']);
     $apellido = trim($_POST['apellido']);
-    $telefono = trim($_POST['telefono']); // NUEVO
-    $correo = trim($_POST['correo']);     // NUEVO
-    $centro_costo = trim($_POST['centro_costo']);
-    $cargo = trim($_POST['cargo']);
-    $salario_base = $_POST['salario_base'];    
+    $telefono = trim($_POST['telefono']);
+    $correo = trim($_POST['correo']);
 
-    //Instanciamos el modelo de empleado
+    // Ahora en el formulario (vista) los selects deberán enviar el ID, no el texto.
+    $id_centro_costo = $_POST['id_centro_costo'];
+    $id_cargo = $_POST['id_cargo'];
+
+    $salario_base = $_POST['salario_base'];
+    $fecha_ingreso = date('Y-m-d'); // Asignamos fecha actual por defecto
+
     $modeloEmpleado = new Empleado($conexion);
-    if ($modeloEmpleado->registrar($cedula, $password, $nombre, $apellido, $telefono, $correo, $centro_costo, $cargo, $salario_base)) {
-        $mensaje = "Empleado registrado exitosamente.";
+
+    // Pasamos los nuevos campos a la función registrar
+    if ($modeloEmpleado->registrar($cedula, $password, $nombre, $apellido, $telefono, $correo, $id_centro_costo, $id_cargo, $salario_base, $fecha_ingreso)) {
+        $mensaje = "Empleado y usuario registrado exitosamente.";
     } else {
-        $mensaje = "Error al registrar el empleado. Es posible que la cédula ya exista.";
+        $mensaje = "Error al registrar el empleado. Es posible que el correo o número de identificación ya existan.";
     }
 }
-
 ?>

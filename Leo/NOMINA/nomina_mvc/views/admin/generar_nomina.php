@@ -19,15 +19,14 @@
 
     <?php if ($empleado_seleccionado): ?>
     <form action="generar_nomina.php" method="POST">
-        <!-- Input oculto para enviar el ID al procesar -->
         <input type="hidden" name="id_empleado" value="<?= $empleado_seleccionado['id_empleado'] ?>">
 
         <table border="0">
             <tr>
                 <td><label>Empleado:</label></td>
                 <td>
-                    <b><?= $empleado_seleccionado['cedula'] ?> - <?= $empleado_seleccionado['nombre'] ?>
-                        <?= $empleado_seleccionado['apellido'] ?></b>
+                    <b><?= $empleado_seleccionado['numero_identificacion'] ?> -
+                        <?= $empleado_seleccionado['nombre_completo'] ?></b>
                 </td>
             </tr>
             <tr>

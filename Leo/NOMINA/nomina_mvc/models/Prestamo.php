@@ -1,18 +1,19 @@
 <?php
-// Prestamo
-
-class Prestamo {
+// models/Prestamo.php
+class Prestamo
+{
     private $conexion;
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->conexion = $db;
     }
 
-    // Busca un préstamo que aún no se haya pagado
-    public function obtenerPrestamoActivo($id_empleado) {
-        $sql = "SELECT * FROM prestamos WHERE id_empleado = ? AND estado = 'activo' LIMIT 1";
+    public function obtenerPrestamoActivo($id_empleado)
+    {
+        $sql = "SELECT * FROM prestamos WHERE id_empleado = ? AND estado = 'ACTIVO' LIMIT 1";
         $stmt = mysqli_prepare($this->conexion, $sql);
-        
+
         if ($stmt) {
             mysqli_stmt_bind_param($stmt, "i", $id_empleado);
             mysqli_stmt_execute($stmt);
@@ -22,17 +23,16 @@ class Prestamo {
         return null;
     }
 
-    // Resta la cuota del saldo actual y actualiza el estado si llega a cero
-    public function descontarCuota($id_prestamo, $cuota_descontada, $saldo_anterior) {
+    public function descontarCuota($id_prestamo, $cuota_descontada, $saldo_anterior)
+    {
         $nuevo_saldo = $saldo_anterior - $cuota_descontada;
-        
-        // Si el saldo llega a 0 el préstamo se marca como pagado
-        $nuevo_estado = ($nuevo_saldo <= 0) ? 'pagado' : 'activo';
+
+        $nuevo_estado = ($nuevo_saldo <= 0) ? 'PAGADO' : 'ACTIVO';
         if ($nuevo_saldo < 0) $nuevo_saldo = 0;
 
         $sql = "UPDATE prestamos SET saldo_actual = ?, estado = ?, cuotas_pagadas = cuotas_pagadas + 1 WHERE id_prestamo = ?";
         $stmt = mysqli_prepare($this->conexion, $sql);
-        
+
         if ($stmt) {
             mysqli_stmt_bind_param($stmt, "dsi", $nuevo_saldo, $nuevo_estado, $id_prestamo);
             return mysqli_stmt_execute($stmt);
@@ -40,19 +40,18 @@ class Prestamo {
         return false;
     }
 
+    public function registrarPrestamo($id_empleado, $monto_desembolso, $numero_cuotas, $valor_cuota, $fecha_desembolso)
+    {
+        $saldo_actual = $monto_desembolso;
+        $estado = 'ACTIVO';
 
-    // Función para registrar un nuevo préstamo
-    public function registrarPrestamo($id_empleado, $monto_total, $cuotas_totales, $valor_cuota, $fecha_desembolso) {
-        $saldo_actual = $monto_total; // Al inicio, el saldo es igual al monto total
-        $estado = 'activo';
-        
-        $sql = "INSERT INTO prestamos (id_empleado, monto_total, cuotas_totales, valor_cuota, saldo_actual, fecha_desembolso, estado) 
+        $sql = "INSERT INTO prestamos (id_empleado, monto_desembolso, numero_cuotas, fecha_desembolso, valor_cuota, saldo_actual, estado) 
                 VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
+
         $stmt = mysqli_prepare($this->conexion, $sql);
         if ($stmt) {
-            // "iidddss" -> 2 enteros, 3 decimales, 2 strings (fecha y estado)
-            mysqli_stmt_bind_param($stmt, "iidddss", $id_empleado, $monto_total, $cuotas_totales, $valor_cuota, $saldo_actual, $fecha_desembolso, $estado);
+            // "idissds" -> (int) id, (decimal) monto, (int) cuotas, (string) fecha, (decimal) cuota, (decimal) saldo, (string) estado
+            mysqli_stmt_bind_param($stmt, "idissds", $id_empleado, $monto_desembolso, $numero_cuotas, $fecha_desembolso, $valor_cuota, $saldo_actual, $estado);
             if (mysqli_stmt_execute($stmt)) {
                 return true;
             }

@@ -4,41 +4,51 @@ require_once __DIR__ . '/../config/conexion.php';
 
 $mensaje_error = "";
 
-// Verificamos si se envió el formulario
 if (isset($_POST['btn_login'])) {
-    $cedula = trim($_POST['cedula']);
-    $password = $_POST['password'];
+    $correo = trim($_POST['correo'] ?? '');
+    $password = $_POST['password'] ?? '';
 
-    // Buscamos al usuario por su cédula
-    $sql = "SELECT id_empleado, cedula, password, rol FROM empleados WHERE cedula = ?";
-    $stmt = mysqli_prepare($conexion, $sql);
+    // Validaciones básicas de seguridad
+    if ($correo === '' || $password === '') {
+        $mensaje_error = 'Debes completar todos los campos.';
+    } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+        $mensaje_error = 'El formato del correo no es válido.';
+    } else {
+        $sql_usuario = "SELECT id_usuario, nombre_completo, correo, password_hash, estado FROM usuarios WHERE correo = ?";
+        $stmt = mysqli_prepare($conexion, $sql_usuario);
 
-    if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "s", $cedula);
-        mysqli_stmt_execute($stmt);
-        $resultado = mysqli_stmt_get_result($stmt);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "s", $correo);
+            mysqli_stmt_execute($stmt);
+            $resultado = mysqli_stmt_get_result($stmt);
 
-        // Si el usuario existe
-        if ($fila = mysqli_fetch_assoc($resultado)) {
-            // Comparamos la contraseña digitada con el hash de la base de datos
-            if (password_verify($password, $fila['password'])) {
-                
-                // Guardamos los datos en la sesión[cite: 3]
-                $_SESSION['id_empleado'] = $fila['id_empleado'];
-                $_SESSION['rol'] = $fila['rol'];
-
-                // Redireccionamos dependiendo del rol
-                if ($fila['rol'] == 'admin') {
-                    header("Location: views/admin/listar_empleados.php");
+            if ($fila_usuario = mysqli_fetch_assoc($resultado)) {
+                if ($fila_usuario['estado'] === 'INACTIVO') {
+                    $mensaje_error = "Esta cuenta se encuentra inactiva.";
                 } else {
-                    header("Location: views/empleado/perfil_empleado.php");
+                    if (password_verify($password, $fila_usuario['password_hash'])) {
+                        // Asignación de rol temporal (puedes ajustarlo luego si añades la columna a la tabla)
+                        $rol_asignado = ($fila_usuario['correo'] === 'admin@nomina.com') ? 'ADMIN' : 'CONSULTA';
+
+                        $_SESSION['id_usuario'] = $fila_usuario['id_usuario'];
+                        $_SESSION['nombre_usuario'] = $fila_usuario['nombre_completo'];
+                        $_SESSION['rol'] = $rol_asignado;
+
+                        if ($rol_asignado === 'CONSULTA') {
+                            header("Location: views/empleado/perfil_empleado.php");
+                        } else {
+                            header("Location: views/admin/listar_empleados.php");
+                        }
+                        exit;
+                    } else {
+                        $mensaje_error = "La contraseña ingresada es incorrecta.";
+                    }
                 }
-                exit; // Siempre usar exit después de un header
             } else {
-                $mensaje_error = "Contraseña incorrecta.";
+                $mensaje_error = "No existe una cuenta registrada con ese correo.";
             }
         } else {
-            $mensaje_error = "El usuario no existe.";
+            $mensaje_error = "Error en la consulta a la base de datos.";
         }
     }
 }

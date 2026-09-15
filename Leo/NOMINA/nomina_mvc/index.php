@@ -2,9 +2,8 @@
 // index.php (En la raíz del proyecto)
 session_start();
 
-// Si el usuario ya había iniciado sesión, lo redirigimos automáticamente a su panel
-if (isset($_SESSION['rol'])) {
-    if ($_SESSION['rol'] == 'admin') {
+if (isset($_SESSION['id_usuario'])) {
+    if ($_SESSION['rol'] == 'ADMIN') {
         header("Location: views/admin/listar_empleados.php");
     } else {
         header("Location: views/empleado/perfil_empleado.php");
@@ -12,7 +11,7 @@ if (isset($_SESSION['rol'])) {
     exit;
 }
 
-// Si no ha iniciado sesión, cargamos el controlador del login
+// Requerimos el controlador
 require_once 'controllers/LoginController.php';
 ?>
 <!DOCTYPE html>
@@ -20,36 +19,39 @@ require_once 'controllers/LoginController.php';
 
 <head>
     <meta charset="UTF-8">
-    <title>Login - Sistema de Nómina</title>
+    <title>Iniciar sesión - Gestión de Nómina</title>
+    <!-- Asegúrate de tener tu archivo css en la ruta correcta -->
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>
+    <div class="contenedor-auth">
+        <div class="tarjeta">
+            <h2>Gestión de Nómina</h2>
+            <p class="subtitulo">Inicio de sesión del sistema</p>
 
-    <h2>Iniciar Sesión</h2>
+            <?php if (!empty($mensaje_error)): ?>
+            <div class="alerta alerta-error"><?= htmlspecialchars($mensaje_error) ?></div>
+            <?php endif; ?>
 
-    <!-- Mensaje de error en HTML puro -->
-    <?php if (!empty($mensaje_error)): ?>
-    <p><strong><?= $mensaje_error ?></strong></p>
-    <?php endif; ?>
+            <form action="index.php" method="POST" novalidate>
+                <div class="campo">
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" id="correo" name="correo" required
+                        value="<?= htmlspecialchars($_POST['correo'] ?? '') ?>">
+                </div>
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" name="btn_login" class="boton boton-primario">Iniciar sesión</button>
+            </form>
 
-    <form action="index.php" method="POST">
-        <table border="0">
-            <tr>
-                <td><label>Cédula:</label></td>
-                <td><input type="text" name="cedula" required></td>
-            </tr>
-            <tr>
-                <td><label>Contraseña:</label></td>
-                <td><input type="password" name="password" required></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button type="submit" name="btn_login">Entrar</button>
-                </td>
-            </tr>
-        </table>
-    </form>
-
+            <div class="enlaces">
+                <a href="recuperar.php">¿Olvidaste tu contraseña?</a>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

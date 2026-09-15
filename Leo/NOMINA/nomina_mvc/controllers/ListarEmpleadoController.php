@@ -10,7 +10,6 @@ $modeloNomina = new Nomina($conexion);
 $modeloPrestamo = new Prestamo($conexion);
 $mensaje_accion = "";
 
-// Usamos isset para validar si llega una orden de eliminación
 if (isset($_GET['eliminar'])) {
     $id_a_eliminar = $_GET['eliminar'];
     if ($modeloEmpleado->eliminar($id_a_eliminar)) {
@@ -20,19 +19,13 @@ if (isset($_GET['eliminar'])) {
     }
 }
 
-// Obtenemos los empleados y verificamos el estado del mes actual y prestamos
 $empleadosBrutos = $modeloEmpleado->listarTodos();
 $listaEmpleados = [];
-$mes_actual = date('n');
-$anio_actual = date('Y');
+$fecha_inicio_mes = date('Y-m-01'); // Primer día del mes actual
 
 foreach ($empleadosBrutos as $emp) {
-    // Verificamos si tiene nomina calculada este mes
-    $emp['nomina_calculada'] = $modeloNomina->verificarNominaMes($emp['id_empleado'], $mes_actual, $anio_actual);
-    
-    // Verificamos si tiene un prestamo activo en curso
+    $emp['nomina_calculada'] = $modeloNomina->verificarNominaMes($emp['id_empleado'], $fecha_inicio_mes);
     $emp['prestamo_activo'] = $modeloPrestamo->obtenerPrestamoActivo($emp['id_empleado']);
-    
     $listaEmpleados[] = $emp;
 }
 ?>

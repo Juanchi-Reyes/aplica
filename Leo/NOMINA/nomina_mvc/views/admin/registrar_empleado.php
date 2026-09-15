@@ -1,17 +1,11 @@
 <?php require_once '../../controllers/seguridad_admin.php'; ?>
-<?php
-// vista de registrar_empleado
-
-// 1. LÓGICA ARRIBA: Incluimos el controlador para que procese el formulario si fue enviado
-require_once '../../controllers/EmpleadoController.php';
-?>
+<?php require_once '../../controllers/EmpleadoController.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Empleado - Nómina</title>
 </head>
 
@@ -19,7 +13,6 @@ require_once '../../controllers/EmpleadoController.php';
     <h2>Registrar Nuevo Empleado</h2>
     <p><a href="listar_empleados.php">Volver a la lista de empleados</a></p>
 
-    <!-- Sintaxis alternativa para mostrar mensajes -->
     <?php if (!empty($mensaje)): ?>
     <p><strong><?= $mensaje ?></strong></p>
     <?php endif; ?>
@@ -27,11 +20,11 @@ require_once '../../controllers/EmpleadoController.php';
     <form action="registrar_empleado.php" method="POST">
         <table border="0">
             <tr>
-                <td><label>Cédula:</label></td>
+                <td><label>Número de Identificación:</label></td>
                 <td><input type="text" name="cedula" required></td>
             </tr>
             <tr>
-                <td><label>Contraseña:</label></td>
+                <td><label>Contraseña (Acceso al sistema):</label></td>
                 <td><input type="password" name="password" required></td>
             </tr>
             <tr>
@@ -47,22 +40,30 @@ require_once '../../controllers/EmpleadoController.php';
                 <td><input type="text" name="telefono" required></td>
             </tr>
             <tr>
-                <td><label>Correo Electrónico:</label></td>
+                <td><label>Correo Electrónico (Para Login):</label></td>
                 <td><input type="email" name="correo" required></td>
             </tr>
             <tr>
                 <td><label>Centro de Costo:</label></td>
                 <td>
-                    <select name="centro_costo" required>
-                        <option value="Administracion">Administración</option>
-                        <option value="Operaciones">Operaciones</option>
-                        <option value="Ventas">Ventas</option>
+                    <!-- Ahora enviamos el ID en lugar del texto -->
+                    <select name="id_centro_costo" required>
+                        <option value="1">Administración</option>
+                        <option value="2">Operaciones</option>
+                        <option value="3">Ventas</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td><label>Cargo:</label></td>
-                <td><input type="text" name="cargo" required></td>
+                <td>
+                    <!-- Ahora enviamos el ID del cargo -->
+                    <select name="id_cargo" required>
+                        <option value="1">Gerente</option>
+                        <option value="2">Asistente</option>
+                        <option value="3">Vendedor</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td><label>Salario Base:</label></td>
@@ -75,7 +76,6 @@ require_once '../../controllers/EmpleadoController.php';
             </tr>
         </table>
     </form>
-
 </body>
 
 </html>
