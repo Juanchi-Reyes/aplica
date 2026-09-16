@@ -34,8 +34,6 @@
                 <td><input type="text" name="nombre_completo"
                         value="<?= htmlspecialchars($empleado['nombre_completo']) ?>" required></td>
             </tr>
-
-            <!-- NUEVOS CAMPOS: Teléfono y Correo -->
             <tr>
                 <td><label>Teléfono:</label></td>
                 <td><input type="text" name="telefono" value="<?= htmlspecialchars($empleado['telefono']) ?>" required>

@@ -9,8 +9,6 @@ require_once '../../controllers/ListarEmpleadoController.php';
     <meta charset="UTF-8">
     <title>Lista de Empleados</title>
     <link rel="stylesheet" href="../../css/estilo.css">
-
-    <!-- IMPORTANTE: Se quitó la restricción al final de la URL para que carguen todos los íconos -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 

@@ -55,7 +55,8 @@
     <?php endif; ?>
 </body>
 <footer class="footer-nomina">
-        <p class="titulo-footer">Nómina Aplicaciones Web - Grupo 578-301</p>
-        <p class="integrantes">Integrantes: Reyes - Tonetti - Fonseca - Valencia - Pinilla</p>
-    </footer>
+    <p class="titulo-footer">Nómina Aplicaciones Web - Grupo 578-301</p>
+    <p class="integrantes">Integrantes: Reyes - Tonetti - Fonseca - Valencia - Pinilla</p>
+</footer>
+
 </html>

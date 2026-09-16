@@ -33,7 +33,6 @@ require_once '../../controllers/EmpleadoController.php';
                 <td><label>Contraseña (Acceso al sistema):</label></td>
                 <td><input type="password" name="password" required></td>
             </tr>
-            <!-- CAMBIO: Ahora solo se pide un único campo para el nombre completo -->
             <tr>
                 <td><label>Nombre Completo:</label></td>
                 <td><input type="text" name="nombre" required></td>

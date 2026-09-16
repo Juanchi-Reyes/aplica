@@ -1,5 +1,4 @@
 <?php
-// models/Prestamo.php
 class Prestamo
 {
     private $conexion;

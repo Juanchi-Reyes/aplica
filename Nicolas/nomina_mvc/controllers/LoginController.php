@@ -1,5 +1,4 @@
 <?php
-// controllers/LoginController.php
 require_once __DIR__ . '/../config/conexion.php';
 
 $mensaje_error = "";
@@ -13,7 +12,6 @@ if (isset($_POST['btn_login'])) {
     } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
         $mensaje_error = 'El formato del correo no es válido.';
     } else {
-        // Traemos el campo 'rol' desde la DB
         $sql_usuario = "SELECT id_usuario, nombre_completo, correo, password_hash, rol, estado FROM usuarios WHERE correo = ?";
         $stmt = mysqli_prepare($conexion, $sql_usuario);
 

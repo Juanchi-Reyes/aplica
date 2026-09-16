@@ -1,5 +1,4 @@
 <?php
-// controllers/seguridad_empleado.php
 session_start();
 
 // Validamos que exista la sesión y que el rol sea 'EMPLEADO'

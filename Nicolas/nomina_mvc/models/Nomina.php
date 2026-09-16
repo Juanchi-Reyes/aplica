@@ -1,5 +1,4 @@
 <?php
-// models/Nomina.php
 class Nomina
 {
     private $conexion;

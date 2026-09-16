@@ -1,5 +1,4 @@
 <?php
-// controllers/RestablecerController.php
 require_once __DIR__ . '/../config/conexion.php';
 
 $error  = '';

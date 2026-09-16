@@ -18,7 +18,6 @@ if (!$empleado) {
     die("Empleado no encontrado.");
 }
 
-// 1. Buscamos la nómina. Si recibimos un ID de nómina específico por GET, buscamos esa. Si no, buscamos la última.
 if (isset($_GET['nomina'])) {
     $id_nomina_especifica = $_GET['nomina'];
     $sql_nomina = "SELECT n.id_nomina, n.descripcion, n.fecha_inicio 
@@ -44,7 +43,6 @@ if (!$nomina_maestra) {
     die("No hay registros de nómina para este empleado en la base de datos.");
 }
 
-// 2. Extraemos todos los detalles (conceptos) guardados (usando id_usuario)
 $sql_detalles = "SELECT id_concepto, dias, valor FROM detalle_nomina WHERE id_nomina = ? AND id_usuario = ?";
 $stmt_d = mysqli_prepare($conexion, $sql_detalles);
 mysqli_stmt_bind_param($stmt_d, "ii", $nomina_maestra['id_nomina'], $id_usuario);

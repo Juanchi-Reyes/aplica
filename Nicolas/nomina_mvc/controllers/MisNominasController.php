@@ -1,5 +1,4 @@
 <?php
-// controllers/MisNominasController.php
 require_once __DIR__ . '/../config/conexion.php';
 
 $id_usuario = $_SESSION['id_usuario'];

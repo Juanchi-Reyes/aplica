@@ -1,5 +1,4 @@
 <?php
-// index.php (En la raíz del proyecto)
 session_start();
 
 if (isset($_SESSION['id_usuario'])) {
@@ -20,7 +19,6 @@ require_once 'controllers/LoginController.php';
 <head>
     <meta charset="UTF-8">
     <title>Iniciar sesión - Gestión de Nómina</title>
-    <!-- Asegúrate de tener tu archivo css en la ruta correcta -->
     <link rel="stylesheet" href="css/estilo.css">
 </head>
 

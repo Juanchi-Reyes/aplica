@@ -1,5 +1,4 @@
 <?php
-// models/Empleado.php
 class Empleado
 {
     private $conexion;
@@ -10,10 +9,8 @@ class Empleado
         $this->conexion = $db;
     }
 
-    // CAMBIO: Quitamos el parámetro $apellido
     public function registrar($cedula, $password, $nombre_completo, $telefono, $correo, $id_centro_costo, $id_cargo, $salario_base, $fecha_ingreso)
     {
-        // Limpiamos espacios en blanco del nombre completo
         $nombre_completo = trim($nombre_completo);
         $password_hash   = password_hash($password, PASSWORD_BCRYPT);
         $rol             = 'EMPLEADO';
@@ -28,7 +25,6 @@ class Empleado
             return false;
         }
 
-        // 10 parámetros: ssssssiids
         mysqli_stmt_bind_param(
             $stmt,
             "ssssssiids",
@@ -54,20 +50,16 @@ class Empleado
         }
     }
 
-    // CAMBIO: Quitamos el parámetro $apellido para mantener consistencia
-    // Reemplaza esta función dentro de models/Empleado.php
     public function actualizar($id_usuario, $cedula, $nombre_completo, $telefono, $correo, $id_centro_costo, $id_cargo, $salario_base)
     {
         $nombre_completo = trim($nombre_completo);
 
-        // Añadimos telefono y correo a la instrucción UPDATE
         $sql = "UPDATE usuarios 
                 SET numero_identificacion = ?, nombre_completo = ?, telefono = ?, correo = ?, id_centro_costo = ?, id_cargo = ?, sueldo_base = ? 
                 WHERE id_usuario = ?";
         $stmt = mysqli_prepare($this->conexion, $sql);
 
         if ($stmt) {
-            // Ajustamos los parámetros: s(cedula) s(nombre) s(telefono) s(correo) i(centro_costo) i(cargo) d(sueldo) i(id) => ssssiidi
             mysqli_stmt_bind_param($stmt, "ssssiidi", $cedula, $nombre_completo, $telefono, $correo, $id_centro_costo, $id_cargo, $salario_base, $id_usuario);
             $resultado = mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);

@@ -1,5 +1,4 @@
 <?php
-// controllers/PerfilEmpleadoController.php
 require_once __DIR__ . '/../config/conexion.php';
 require_once __DIR__ . '/../models/Empleado.php';
 require_once __DIR__ . '/../models/Prestamo.php';

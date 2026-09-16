@@ -1,5 +1,4 @@
 <?php
-// controllers/EmpleadoController.php
 require_once __DIR__ . '/../config/conexion.php';
 require_once __DIR__ . '/../models/Empleado.php';
 
@@ -9,7 +8,6 @@ $tipo_alerta = "";
 if (isset($_POST['btn_registrar'])) {
     $cedula          = trim($_POST['cedula'] ?? '');
     $password        = $_POST['password'] ?? '';
-    // CAMBIO: Capturamos directamente el nombre completo sin buscar el apellido
     $nombre_completo = trim($_POST['nombre'] ?? '');
     $telefono        = trim($_POST['telefono'] ?? '');
     $correo          = trim($_POST['correo'] ?? '');
@@ -24,7 +22,6 @@ if (isset($_POST['btn_registrar'])) {
     } else {
         $modeloEmpleado = new Empleado($conexion);
 
-        // CAMBIO: Enviamos $nombre_completo y quitamos la variable de apellido de los argumentos
         if ($modeloEmpleado->registrar($cedula, $password, $nombre_completo, $telefono, $correo, $id_centro_costo, $id_cargo, $salario_base, $fecha_ingreso)) {
             $mensaje = "Empleado registrado exitosamente.";
             $tipo_alerta = "exito";

@@ -1,5 +1,4 @@
 <?php
-// controllers/seguridad_admin.php
 session_start();
 
 // Validamos usando isset que la sesión exista y que el rol sea el correcto (ahora es 'ADMIN' en mayúsculas)
