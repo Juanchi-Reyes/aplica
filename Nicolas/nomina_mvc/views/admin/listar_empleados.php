@@ -9,6 +9,11 @@ require_once '../../controllers/ListarEmpleadoController.php';
     <meta charset="UTF-8">
     <title>Lista de Empleados</title>
     <link rel="stylesheet" href="../../css/estilo.css">
+
+    <!-- IMPORTANTE: Se quitó la restricción al final de la URL para que carguen todos los íconos -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 </head>
 
 <body>
@@ -19,8 +24,12 @@ require_once '../../controllers/ListarEmpleadoController.php';
     <?php endif; ?>
 
     <p>
-        <a href="registrar_empleado.php">Registrar Nuevo Empleado</a> |
-        <a href="../../logout.php">Cerrar Sesion</a>
+        <a href="registrar_empleado.php" title="Registrar Nuevo Empleado">
+            <span class="material-symbols-outlined">how_to_reg</span> Registrar Nuevo Empleado
+        </a> |
+        <a href="../../logout.php" title="Cerrar Sesión">
+            <span class="material-symbols-outlined">logout</span> Cerrar Sesión
+        </a>
     </p>
 
     <table border="1">
@@ -57,26 +66,46 @@ require_once '../../controllers/ListarEmpleadoController.php';
                     <?php endif; ?>
                 </td>
 
-                <td>
-                    <!-- ¡AQUÍ ESTÁ EL NUEVO BOTÓN VER! -->
-                    <a href="ver_empleado.php?id=<?= $empleado['id_usuario'] ?>">Ver</a> |
+                <td class="acciones-tabla">
+                    <!-- VER -->
+                    <a href="ver_empleado.php?id=<?= $empleado['id_usuario'] ?>" title="Ver">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </a> |
 
-                    <a href="editar_empleado.php?id=<?= $empleado['id_usuario'] ?>">Editar</a> |
+                    <!-- EDITAR -->
+                    <a href="editar_empleado.php?id=<?= $empleado['id_usuario'] ?>" title="Editar">
+                        <span class="material-symbols-outlined">edit</span>
+                    </a> |
+
+                    <!-- ELIMINAR -->
                     <a href="listar_empleados.php?eliminar=<?= $empleado['id_usuario'] ?>"
-                        onclick="return confirm('¿Seguro de eliminar?');">Eliminar</a> |
+                        onclick="return confirm('¿Seguro de eliminar?');" title="Eliminar">
+                        <span class="material-symbols-outlined">delete</span>
+                    </a> |
 
+                    <!-- PRÉSTAMO -->
                     <?php if ($empleado['prestamo_activo']): ?>
-                    <a href="asignar_prestamo.php?id=<?= $empleado['id_usuario'] ?>">Préstamo en curso</a> |
+                    <a href="asignar_prestamo.php?id=<?= $empleado['id_usuario'] ?>" title="Préstamo en curso">
+                        <span class="material-symbols-outlined">money_bag</span>
+                    </a> |
                     <?php else: ?>
-                    <a href="asignar_prestamo.php?id=<?= $empleado['id_usuario'] ?>">Asignar Préstamo</a> |
+                    <a href="asignar_prestamo.php?id=<?= $empleado['id_usuario'] ?>" title="Asignar Préstamo">
+                        <span class="material-symbols-outlined">money_bag</span>
+                    </a> |
                     <?php endif; ?>
 
+                    <!-- PDF / LIQUIDAR -->
                     <?php if ($empleado['nomina_calculada']): ?>
-                    <a href="generar_pdf.php?id=<?= $empleado['id_usuario'] ?>" target="_blank">
-                        <button type="button">pdf</button>
+                    <a href="generar_pdf.php?id=<?= $empleado['id_usuario'] ?>" target="_blank" title="Descargar PDF">
+                        <button type="button"
+                            style="cursor: pointer; border: none; background: transparent; padding: 0;">
+                            <span class="material-symbols-outlined" style="color: #d9534f;">download</span>
+                        </button>
                     </a>
                     <?php else: ?>
-                    <a href="generar_nomina.php?id=<?= $empleado['id_usuario'] ?>">Liquidar</a>
+                    <a href="generar_nomina.php?id=<?= $empleado['id_usuario'] ?>" title="Liquidar">
+                        <span class="material-symbols-outlined">article</span>
+                    </a>
                     <?php endif; ?>
                 </td>
             </tr>
