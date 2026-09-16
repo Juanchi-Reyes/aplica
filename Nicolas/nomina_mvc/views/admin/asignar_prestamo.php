@@ -16,7 +16,9 @@ require_once '../../controllers/PrestamoController.php';
     <?php if (!empty($mensaje)): ?>
     <p><strong><?= $mensaje ?></strong></p>
     <?php endif; ?>
-    <p><a href="listar_empleados.php">Volver a la lista de empleados</a></p>
+    <nav class="header-nav">
+        <p><a href="listar_empleados.php">Volver a la lista de empleados</a></p>
+    </nav>
 
     <?php if (!empty($empleado_seleccionado)): ?>
     <p>Empleado Seleccionado: <b><?= $empleado_seleccionado['numero_identificacion'] ?> -
@@ -75,5 +77,9 @@ require_once '../../controllers/PrestamoController.php';
     <?php endif; ?>
     <?php endif; ?>
 </body>
+<footer class="footer-nomina">
+    <p class="titulo-footer">Nómina Aplicaciones Web - Grupo 578-301</p>
+    <p class="integrantes">Integrantes: Reyes - Tonetti - Fonseca - Valencia - Pinilla</p>
+</footer>
 
 </html>

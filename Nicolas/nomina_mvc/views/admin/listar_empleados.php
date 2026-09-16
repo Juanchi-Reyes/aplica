@@ -23,14 +23,14 @@ require_once '../../controllers/ListarEmpleadoController.php';
     <p><strong><?= htmlspecialchars($mensaje_accion) ?></strong></p>
     <?php endif; ?>
 
-    <p>
+    <nav class="header-nav">
         <a href="registrar_empleado.php" title="Registrar Nuevo Empleado">
             <span class="material-symbols-outlined">how_to_reg</span> Registrar Nuevo Empleado
-        </a> |
+        </a>
         <a href="../../logout.php" title="Cerrar Sesión">
             <span class="material-symbols-outlined">logout</span> Cerrar Sesión
         </a>
-    </p>
+    </nav>
 
     <table border="1">
         <thead>
@@ -114,5 +114,10 @@ require_once '../../controllers/ListarEmpleadoController.php';
         </tbody>
     </table>
 </body>
+
+<footer class="footer-nomina">
+    <p class="titulo-footer">Nómina Aplicaciones Web - Grupo 578-301</p>
+    <p class="integrantes">Integrantes: Reyes - Tonetti - Fonseca - Valencia - Pinilla</p>
+</footer>
 
 </html>

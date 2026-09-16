@@ -63,11 +63,13 @@ input[type="email"],
 input[type="password"], 
 select {
     width: 100%;
-    padding: 10px 12px;
+    max-width: 350px; /* Evita que los inputs sean gigantes en pantallas anchas */
+    padding: 8px 10px; /* Padding más pequeño para un aspecto menos brusco */
     border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 1rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
     font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .campo input:focus, 
@@ -78,10 +80,9 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
 }
 
-/* Ajuste para que los inputs en tablas de admin no sean 100% anchos si no es necesario */
 table input, table select {
     width: auto;
-    min-width: 200px;
+    min-width: 120px; /* Reducción de tamaño en las tablas */
 }
 
 /* ---------- Botones Globales ---------- */
@@ -99,24 +100,16 @@ button, .boton {
     transition: background-color 0.2s;
 }
 
-button[type="submit"], .boton-primario {
-    background-color: #1e3a8a;
-    color: #ffffff;
-    width: 100%;
-}
-
 button[type="submit"]:hover, .boton-primario:hover {
     background-color: #16306e;
-}
-
-button[type="button"], .boton-secundario {
-    background-color: #e5e7eb;
-    color: #1f2937;
-    width: auto;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 button[type="button"]:hover, .boton-secundario:hover {
     background-color: #d1d5db;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .boton-bloque {
@@ -222,3 +215,54 @@ table tbody tr:hover {
     color: #1e3a8a;
 }
 
+/* ---------- Navegación Superior ---------- */
+.header-nav {
+    background-color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    color: #1e3a8a;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.header-nav a:hover {
+    background-color: #f3f4f6;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+/* ---------- Footer ---------- */
+.footer-nomina {
+    margin-top: 50px;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #e5e7eb;
+    background-color: transparent;
+}
+
+.footer-nomina .titulo-footer {
+    color: #4b5563;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0 0 5px 0;
+}
+
+.footer-nomina .integrantes {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    margin: 0;
+}

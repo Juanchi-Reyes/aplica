@@ -19,7 +19,9 @@ require_once '../../controllers/VerEmpleadoController.php';
 <body>
     <h2>Detalles del Empleado</h2>
 
-    <p><a href="listar_empleados.php">Volver a la lista de empleados</a></p>
+    <nav class="header-nav">
+        <p><a href="listar_empleados.php">Volver a la lista de empleados</a></p>
+    </nav>
 
     <!-- Usamos una tabla sin inputs, para que sea de "Solo Lectura" -->
     <table border="1" cellpadding="8">
@@ -74,5 +76,9 @@ require_once '../../controllers/VerEmpleadoController.php';
         </a>
     </p>
 </body>
+<footer class="footer-nomina">
+    <p class="titulo-footer">Nómina Aplicaciones Web - Grupo 578-301</p>
+    <p class="integrantes">Integrantes: Reyes - Tonetti - Fonseca - Valencia - Pinilla</p>
+</footer>
 
 </html>
