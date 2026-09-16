@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar Empleado - Nómina</title>
+    <link rel="stylesheet" href="../../css/estilo.css">
 </head>
 
 <body>
@@ -23,13 +24,27 @@
         <table border="1">
             <tr>
                 <td><label>Número de Identificación:</label></td>
-                <td><input type="text" name="numero_identificacion" value="<?= $empleado['numero_identificacion'] ?>"
-                        required></td>
+                <td><input type="text" name="numero_identificacion"
+                        value="<?= htmlspecialchars($empleado['numero_identificacion']) ?>" required></td>
             </tr>
             <tr>
                 <td><label>Nombre Completo:</label></td>
-                <td><input type="text" name="nombre_completo" value="<?= $empleado['nombre_completo'] ?>" required></td>
+                <td><input type="text" name="nombre_completo"
+                        value="<?= htmlspecialchars($empleado['nombre_completo']) ?>" required></td>
             </tr>
+
+            <!-- NUEVOS CAMPOS: Teléfono y Correo -->
+            <tr>
+                <td><label>Teléfono:</label></td>
+                <td><input type="text" name="telefono" value="<?= htmlspecialchars($empleado['telefono']) ?>" required>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Correo Electrónico:</label></td>
+                <td><input type="email" name="correo" value="<?= htmlspecialchars($empleado['correo']) ?>" required>
+                </td>
+            </tr>
+
             <tr>
                 <td><label>Centro de Costo:</label></td>
                 <td>

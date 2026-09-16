@@ -12,7 +12,7 @@ require_once 'controllers/RestablecerController.php';
 <head>
     <meta charset="UTF-8">
     <title>Restablecer contraseña - Gestión de Nómina</title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/estilo.css">
 </head>
 
 <body>

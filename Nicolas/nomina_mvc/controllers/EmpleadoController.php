@@ -9,8 +9,8 @@ $tipo_alerta = "";
 if (isset($_POST['btn_registrar'])) {
     $cedula          = trim($_POST['cedula'] ?? '');
     $password        = $_POST['password'] ?? '';
-    $nombre          = trim($_POST['nombre'] ?? '');
-    $apellido        = trim($_POST['apellido'] ?? '');
+    // CAMBIO: Capturamos directamente el nombre completo sin buscar el apellido
+    $nombre_completo = trim($_POST['nombre'] ?? '');
     $telefono        = trim($_POST['telefono'] ?? '');
     $correo          = trim($_POST['correo'] ?? '');
     $id_centro_costo = (int)($_POST['id_centro_costo'] ?? 1);
@@ -18,13 +18,14 @@ if (isset($_POST['btn_registrar'])) {
     $salario_base    = (float)($_POST['salario_base'] ?? 0);
     $fecha_ingreso   = date('Y-m-d');
 
-    if ($cedula === '' || $password === '' || $nombre === '' || $correo === '') {
+    if ($cedula === '' || $password === '' || $nombre_completo === '' || $correo === '') {
         $mensaje = "Error: Por favor completa todos los campos obligatorios.";
         $tipo_alerta = "error";
     } else {
         $modeloEmpleado = new Empleado($conexion);
 
-        if ($modeloEmpleado->registrar($cedula, $password, $nombre, $apellido, $telefono, $correo, $id_centro_costo, $id_cargo, $salario_base, $fecha_ingreso)) {
+        // CAMBIO: Enviamos $nombre_completo y quitamos la variable de apellido de los argumentos
+        if ($modeloEmpleado->registrar($cedula, $password, $nombre_completo, $telefono, $correo, $id_centro_costo, $id_cargo, $salario_base, $fecha_ingreso)) {
             $mensaje = "Empleado registrado exitosamente.";
             $tipo_alerta = "exito";
         } else {

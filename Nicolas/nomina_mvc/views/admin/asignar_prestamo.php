@@ -8,6 +8,7 @@ require_once '../../controllers/PrestamoController.php';
 <head>
     <meta charset="UTF-8">
     <title>Gestionar Prestamo</title>
+    <link rel="stylesheet" href="../../css/estilo.css">
 </head>
 
 <body>

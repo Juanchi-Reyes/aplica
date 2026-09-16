@@ -21,7 +21,7 @@ require_once 'controllers/LoginController.php';
     <meta charset="UTF-8">
     <title>Iniciar sesión - Gestión de Nómina</title>
     <!-- Asegúrate de tener tu archivo css en la ruta correcta -->
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/estilo.css">
 </head>
 
 <body>

@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Generar Nomina Individual</title>
+    <link rel="stylesheet" href="../../css/estilo.css">
 </head>
 
 <body>

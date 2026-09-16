@@ -8,6 +8,7 @@ require_once '../../controllers/EmpleadoController.php';
 <head>
     <meta charset="UTF-8">
     <title>Registrar Empleado - Nómina</title>
+    <link rel="stylesheet" href="../../css/estilo.css">
 </head>
 
 <body>
@@ -30,13 +31,10 @@ require_once '../../controllers/EmpleadoController.php';
                 <td><label>Contraseña (Acceso al sistema):</label></td>
                 <td><input type="password" name="password" required></td>
             </tr>
+            <!-- CAMBIO: Ahora solo se pide un único campo para el nombre completo -->
             <tr>
-                <td><label>Nombres:</label></td>
+                <td><label>Nombre Completo:</label></td>
                 <td><input type="text" name="nombre" required></td>
-            </tr>
-            <tr>
-                <td><label>Apellidos:</label></td>
-                <td><input type="text" name="apellido" required></td>
             </tr>
             <tr>
                 <td><label>Teléfono:</label></td>

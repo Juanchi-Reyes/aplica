@@ -8,6 +8,7 @@ require_once '../../controllers/ListarEmpleadoController.php';
 <head>
     <meta charset="UTF-8">
     <title>Lista de Empleados</title>
+    <link rel="stylesheet" href="../../css/estilo.css">
 </head>
 
 <body>
@@ -49,7 +50,6 @@ require_once '../../controllers/ListarEmpleadoController.php';
                 <td>$<?= number_format($empleado['sueldo_base'], 2) ?></td>
 
                 <td>
-                    <!-- Se eliminaron los estilos en línea y se ajustó la validación -->
                     <?php if ($empleado['nomina_calculada']): ?>
                     <span>Validada</span>
                     <?php else: ?>
@@ -58,6 +58,9 @@ require_once '../../controllers/ListarEmpleadoController.php';
                 </td>
 
                 <td>
+                    <!-- ¡AQUÍ ESTÁ EL NUEVO BOTÓN VER! -->
+                    <a href="ver_empleado.php?id=<?= $empleado['id_usuario'] ?>">Ver</a> |
+
                     <a href="editar_empleado.php?id=<?= $empleado['id_usuario'] ?>">Editar</a> |
                     <a href="listar_empleados.php?eliminar=<?= $empleado['id_usuario'] ?>"
                         onclick="return confirm('¿Seguro de eliminar?');">Eliminar</a> |
@@ -68,7 +71,6 @@ require_once '../../controllers/ListarEmpleadoController.php';
                     <a href="asignar_prestamo.php?id=<?= $empleado['id_usuario'] ?>">Asignar Préstamo</a> |
                     <?php endif; ?>
 
-                    <!-- Se cambió el enlace de texto por un botón HTML puro para el PDF -->
                     <?php if ($empleado['nomina_calculada']): ?>
                     <a href="generar_pdf.php?id=<?= $empleado['id_usuario'] ?>" target="_blank">
                         <button type="button">pdf</button>

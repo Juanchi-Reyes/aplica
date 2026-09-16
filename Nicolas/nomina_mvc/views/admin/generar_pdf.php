@@ -18,14 +18,24 @@ if (!$empleado) {
     die("Empleado no encontrado.");
 }
 
-// 1. Buscamos la última nómina liquidada para este empleado en la nueva estructura (usando id_usuario)
-$sql_nomina = "SELECT n.id_nomina, n.descripcion, n.fecha_inicio 
-               FROM nominas n 
-               JOIN detalle_nomina dn ON n.id_nomina = dn.id_nomina 
-               WHERE dn.id_usuario = ? 
-               ORDER BY n.id_nomina DESC LIMIT 1";
-$stmt_n = mysqli_prepare($conexion, $sql_nomina);
-mysqli_stmt_bind_param($stmt_n, "i", $id_usuario);
+// 1. Buscamos la nómina. Si recibimos un ID de nómina específico por GET, buscamos esa. Si no, buscamos la última.
+if (isset($_GET['nomina'])) {
+    $id_nomina_especifica = $_GET['nomina'];
+    $sql_nomina = "SELECT n.id_nomina, n.descripcion, n.fecha_inicio 
+                   FROM nominas n 
+                   JOIN detalle_nomina dn ON n.id_nomina = dn.id_nomina 
+                   WHERE dn.id_usuario = ? AND n.id_nomina = ? LIMIT 1";
+    $stmt_n = mysqli_prepare($conexion, $sql_nomina);
+    mysqli_stmt_bind_param($stmt_n, "ii", $id_usuario, $id_nomina_especifica);
+} else {
+    $sql_nomina = "SELECT n.id_nomina, n.descripcion, n.fecha_inicio 
+                   FROM nominas n 
+                   JOIN detalle_nomina dn ON n.id_nomina = dn.id_nomina 
+                   WHERE dn.id_usuario = ? 
+                   ORDER BY n.id_nomina DESC LIMIT 1";
+    $stmt_n = mysqli_prepare($conexion, $sql_nomina);
+    mysqli_stmt_bind_param($stmt_n, "i", $id_usuario);
+}
 mysqli_stmt_execute($stmt_n);
 $resultado_n = mysqli_stmt_get_result($stmt_n);
 $nomina_maestra = mysqli_fetch_assoc($resultado_n);
@@ -131,6 +141,7 @@ ob_start();
 <head>
     <meta charset="UTF-8">
     <title>Comprobante de Nómina</title>
+    <link rel="stylesheet" href="../../css/estilo.css">
 </head>
 
 <body>

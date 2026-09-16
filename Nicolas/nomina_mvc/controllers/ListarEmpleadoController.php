@@ -24,8 +24,8 @@ $listaEmpleados = [];
 $fecha_inicio_mes = date('Y-m-01'); // Primer día del mes actual
 
 foreach ($empleadosBrutos as $emp) {
-    $emp['nomina_calculada'] = $modeloNomina->verificarNominaMes($emp['id_empleado'], $fecha_inicio_mes);
-    $emp['prestamo_activo'] = $modeloPrestamo->obtenerPrestamoActivo($emp['id_empleado']);
+    $emp['nomina_calculada'] = $modeloNomina->verificarNominaMes($emp['id_usuario'], $fecha_inicio_mes);
+    $emp['prestamo_activo'] = $modeloPrestamo->obtenerPrestamoActivo($emp['id_usuario']);
     $listaEmpleados[] = $emp;
 }
 ?>

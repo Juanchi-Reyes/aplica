@@ -8,15 +8,20 @@ $mensaje = "";
 $empleado = null;
 
 if (isset($_POST['btn_actualizar'])) {
-    $id_usuario = $_POST['id_usuario']; // Actualizado a id_usuario
+    $id_usuario = $_POST['id_usuario'];
     $numero_identificacion = trim($_POST['numero_identificacion']);
     $nombre_completo = trim($_POST['nombre_completo']);
-    $apellido = "";
+
+    // NUEVO: Capturamos teléfono y correo
+    $telefono = trim($_POST['telefono']);
+    $correo = trim($_POST['correo']);
+
     $id_centro_costo = $_POST['id_centro_costo'];
     $id_cargo = $_POST['id_cargo'];
     $sueldo_base = $_POST['sueldo_base'];
 
-    if ($modeloEmpleado->actualizar($id_usuario, $numero_identificacion, $nombre_completo, $apellido, $id_centro_costo, $id_cargo, $sueldo_base)) {
+    // NUEVO: Pasamos las nuevas variables a la función actualizar
+    if ($modeloEmpleado->actualizar($id_usuario, $numero_identificacion, $nombre_completo, $telefono, $correo, $id_centro_costo, $id_cargo, $sueldo_base)) {
         $mensaje = "Datos actualizados correctamente.";
     } else {
         $mensaje = "Error al actualizar los datos.";
